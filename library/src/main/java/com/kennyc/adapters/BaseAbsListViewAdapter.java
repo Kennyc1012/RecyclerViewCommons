@@ -101,7 +101,6 @@ public abstract class BaseAbsListViewAdapter<T> extends BaseAdapter {
         if (mItems != null) {
             mItems.clear();
             notifyDataSetChanged();
-            isEmpty();
         }
     }
 
