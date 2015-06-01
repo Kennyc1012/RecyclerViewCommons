@@ -40,7 +40,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         // An exception is thrown instead of creating a List object since the type of list in unknown
         if (mItems == null) throw new NullPointerException("Adapter list has not been initialized");
         mItems.add(object);
-        notifyDataSetChanged();
+        notifyItemInserted(mItems.size());
     }
 
     /**
@@ -53,13 +53,18 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
             return;
         }
 
+        int startingSize = 0;
+        int endSize = 0;
+
         if (mItems == null) {
             mItems = items;
         } else {
+            startingSize = mItems.size();
             mItems.addAll(items);
         }
 
-        notifyDataSetChanged();
+        endSize = mItems.size();
+        notifyItemRangeInserted(startingSize, endSize);
     }
 
     /**
@@ -70,9 +75,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
      */
     public boolean removeItem(T object) {
         if (mItems != null) {
-            boolean removed = mItems.remove(object);
-            notifyDataSetChanged();
-            return removed;
+            int position = mItems.indexOf(object);
+            return position >= 0 && removeItem(position) != null;
         }
 
         return false;
@@ -87,7 +91,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     public T removeItem(int position) {
         if (mItems != null) {
             T removedItem = mItems.remove(position);
-            notifyDataSetChanged();
+            notifyItemRemoved(position);
             return removedItem;
         }
 
@@ -99,8 +103,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
      */
     public void clear() {
         if (mItems != null) {
+            int size = mItems.size();
             mItems.clear();
-            notifyDataSetChanged();
+            notifyItemRangeRemoved(0, size);
         }
     }
 
