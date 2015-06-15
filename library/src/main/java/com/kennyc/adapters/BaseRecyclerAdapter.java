@@ -11,7 +11,6 @@ import java.util.List;
  * Created by kcampagna on 5/29/15.
  */
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     protected final String TAG = getClass().getSimpleName();
 
     private List<T> mItems;
@@ -32,7 +31,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     /**
-     * Adds an item to the list, {@link #notifyDataSetChanged()} will be called
+     * Adds an item to the list, {@link #notifyItemRangeInserted(int, int)} will be called
      *
      * @param object Object to add to the adapter
      */
@@ -44,7 +43,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     /**
-     * Adds a list of items to the adapter list, {@link #notifyDataSetChanged()} will be called
+     * Adds a list of items to the adapter list, {@link #notifyItemRangeInserted(int, int)} will be called
      *
      * @param items List of items to add to the adapter
      */
@@ -68,7 +67,22 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     /**
-     * Removes an object from the list
+     * Adds a list of items to the adapter list at the given position, {@link #notifyItemRangeInserted(int, int)} will be called
+     *
+     * @param items    List of items to add to the adapter
+     * @param position The position to add the items into the adapter
+     */
+    public void addItems(List<T> items, int position) {
+        if (items == null || items.isEmpty()) {
+            return;
+        }
+
+        mItems.addAll(position, items);
+        notifyItemRangeInserted(position, items.size());
+    }
+
+    /**
+     * Removes an object from the list, {@link #notifyItemRangeRemoved(int, int)} (int, int)} will be called
      *
      * @param object The object to remove from the adapter
      * @return If the object was removed
@@ -83,7 +97,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     /**
-     * Removes an item at the given position, {@link #notifyDataSetChanged()} will be called
+     * Removes an item at the given position, {@link #notifyItemRemoved(int)} will be called
      *
      * @param position The position to remove from the adapter
      * @return The item removed
@@ -99,7 +113,18 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     /**
-     * Removes all items from the list, {@link #notifyDataSetChanged()} will be called
+     * Removes a range of items from the adapter, {@link #notifyItemRangeRemoved(int, int)} will be called
+     *
+     * @param start Starting position of removal
+     * @param end   Ending position of removal
+     */
+    public void removeItems(int start, int end) {
+        mItems.subList(start, end).clear();
+        notifyItemRangeRemoved(start, end - start);
+    }
+
+    /**
+     * Removes all items from the list, {@link #notifyItemRangeRemoved(int, int)} will be called
      */
     public void clear() {
         if (mItems != null) {
@@ -149,6 +174,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
      * @return If the adapter is empty
      */
     public boolean isEmpty() {
-        return mItems == null || mItems.size() <= 0;
+        return getItemCount() <= 0;
     }
 }
