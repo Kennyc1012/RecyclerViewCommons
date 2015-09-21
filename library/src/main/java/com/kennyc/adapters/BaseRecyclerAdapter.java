@@ -1,8 +1,16 @@
 package com.kennyc.adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +22,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     private List<T> mItems;
 
-    protected LayoutInflater mInflater;
+    private LayoutInflater mInflater;
+
+    private Resources mResources;
 
     /**
      * Simple constructor for creating a BaseRecyclerAdapter
@@ -27,6 +37,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     public BaseRecyclerAdapter(Context context, List<T> collection) {
         mItems = collection;
         mInflater = LayoutInflater.from(context);
+        mResources = context.getResources();
     }
 
     /**
@@ -187,6 +198,42 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
      */
     public boolean isEmpty() {
         return getItemCount() <= 0;
+    }
+
+    /**
+     * Returns the color for the given color resource
+     *
+     * @param color Color resource id
+     * @return
+     */
+    @ColorInt
+    protected int getColor(@ColorRes int color) {
+        return mResources.getColor(color);
+    }
+
+    /**
+     * Returns the string for the given string resource
+     *
+     * @param string String resource
+     * @return
+     */
+    protected String getString(@StringRes int string) {
+        return mResources.getString(string);
+    }
+
+    /**
+     * Inflates a view from the given layout resource
+     *
+     * @param layoutId Layout resource to inflate
+     * @param parent   Optional parent view
+     * @return
+     */
+    protected View inflateView(@LayoutRes int layoutId, @Nullable ViewGroup parent) {
+        if (parent == null) {
+            return mInflater.inflate(layoutId, null);
+        }
+
+        return mInflater.inflate(layoutId, parent, false);
     }
 
     /**
