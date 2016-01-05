@@ -2,6 +2,7 @@ package com.kennyc.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
@@ -92,6 +93,16 @@ public abstract class BaseAbsListViewAdapter<T> extends BaseAdapter {
         }
 
         return null;
+    }
+
+    /**
+     * Returns the index of the item in regards to the backing list. If not found, {@link AbsListView#INVALID_POSITION} will be returned
+     *
+     * @param object The object to search for
+     * @return The index of the item. {@link AbsListView#INVALID_POSITION} will be returned if not found
+     */
+    public int indexOf(T object) {
+        return mItems != null && !mItems.isEmpty() ? mItems.indexOf(object) : AbsListView.INVALID_POSITION;
     }
 
     /**

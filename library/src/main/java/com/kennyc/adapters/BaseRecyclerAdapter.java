@@ -147,6 +147,16 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     /**
+     * Returns the index of the item in regards to the backing list. If not found, {@link RecyclerView#NO_POSITION} will be returned
+     *
+     * @param object The object to search for
+     * @return The index of the item. {@link RecyclerView#NO_POSITION} will be returned if not found
+     */
+    public int indexOf(T object) {
+        return mItems != null && !mItems.isEmpty() ? mItems.indexOf(object) : RecyclerView.NO_POSITION;
+    }
+
+    /**
      * Removes all items from the list, {@link #notifyItemRangeRemoved(int, int)} will be called
      */
     public void clear() {
