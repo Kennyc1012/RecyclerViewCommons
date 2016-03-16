@@ -39,5 +39,5 @@ android {
 
 dependencies {
     compile 'com.android.support:support-annotations:+'
-    recyclerviewCompile("com.android.support:recyclerview-v7:23.1.1")
+    recyclerviewCompile("com.android.support:recyclerview-v7:23.2.1")
 }
