@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class BaseRecyclerAdapter<VH extends RecyclerView.ViewHolder, T> extends RecyclerView.Adapter<VH> {
 
     protected final String TAG = getClass().getSimpleName();
 
