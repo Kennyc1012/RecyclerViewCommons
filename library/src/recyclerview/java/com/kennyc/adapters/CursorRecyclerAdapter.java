@@ -45,6 +45,11 @@ public abstract class CursorRecyclerAdapter extends RecyclerView.Adapter<Recycle
         if (oldCursor != null) oldCursor.close();
     }
 
+    /**
+     * Returns if the adapter is empty
+     *
+     * @return
+     */
     public boolean isEmpty() {
         return getItemCount() <= 0;
     }
@@ -76,5 +81,15 @@ public abstract class CursorRecyclerAdapter extends RecyclerView.Adapter<Recycle
         }
 
         return mInflater.inflate(layoutId, parent, false);
+    }
+
+    /**
+     * Returns the {@link Cursor} currently in use by the adapter. May be null
+     *
+     * @return
+     */
+    @Nullable
+    protected Cursor getCursor() {
+        return mCursor;
     }
 }
