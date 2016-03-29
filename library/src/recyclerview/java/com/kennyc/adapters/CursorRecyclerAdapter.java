@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 /**
  * Created by kcampagna on 3/16/16.
  */
-public abstract class CursorRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class CursorRecyclerAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
     protected final String TAG = getClass().getSimpleName();
 
