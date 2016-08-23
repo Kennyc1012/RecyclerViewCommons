@@ -250,5 +250,7 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
      * Frees up any resources tied to the adapter. Should be called in an activities onDestroy lifecycle method if needed
      */
     public void onDestroy() {
+        mResources = null;
+        mInflater = null;
     }
 }
