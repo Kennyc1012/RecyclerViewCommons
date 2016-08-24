@@ -34,7 +34,7 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
      *                   {@link #addItem(Object)} will throw an exception as the list type is undefined. The list
      *                   needs to be created first with {@link #addItems(List)}
      */
-    public BaseRecyclerAdapter(Context context, List<T> collection) {
+    public BaseRecyclerAdapter(Context context, @Nullable List<T> collection) {
         mItems = collection;
         mInflater = LayoutInflater.from(context);
         mResources = context.getResources();
