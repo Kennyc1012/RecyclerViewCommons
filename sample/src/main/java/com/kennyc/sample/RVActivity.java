@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -13,14 +14,15 @@ import android.widget.Toast;
 
 import com.kennyc.adapters.ArrayRecyclerAdapter;
 import com.kennyc.adapters.BaseRecyclerAdapter;
+import com.kennyc.adapters.MenuRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RVActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static Intent createIntent(Context context, boolean isSimple) {
-        return new Intent(context, RVActivity.class).putExtra("isSimple", isSimple);
+    public static Intent createIntent(Context context, int type) {
+        return new Intent(context, RVActivity.class).putExtra("type", type);
     }
 
     private RecyclerView recyclerView;
@@ -38,23 +40,38 @@ public class RVActivity extends AppCompatActivity implements View.OnClickListene
             data.add("Position " + i);
         }
 
-        if (getIntent().getBooleanExtra("isSimple", false)) {
-            ArrayRecyclerAdapter<String> adapter = new ArrayRecyclerAdapter<>(this, android.R.layout.simple_list_item_1, data, this);
-            recyclerView.setAdapter(adapter);
-        } else {
-            CustomAdapter adapter = new CustomAdapter(this, data, this);
-            recyclerView.setAdapter(adapter);
+        RecyclerView.Adapter adapter = null;
+
+        switch (getIntent().getIntExtra("type", 0)) {
+            case 0:
+                adapter = new ArrayRecyclerAdapter<>(this, android.R.layout.simple_list_item_1, data, this);
+                break;
+
+            case 1:
+                adapter = new CustomAdapter(this, data, this);
+                break;
+
+            case 2:
+                adapter = new MenuRecyclerAdapter(this, R.menu.test_menu, this);
+                break;
         }
+
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onClick(View v) {
-        if (recyclerView.getAdapter() instanceof ArrayRecyclerAdapter) {
-            Object item = ((ArrayRecyclerAdapter) recyclerView.getAdapter()).getItem(recyclerView.getChildAdapterPosition(v));
+        RecyclerView.Adapter adapter = recyclerView.getAdapter();
+
+        if (adapter instanceof ArrayRecyclerAdapter) {
+            Object item = ((ArrayRecyclerAdapter) adapter).getItem(recyclerView.getChildAdapterPosition(v));
             Toast.makeText(getApplicationContext(), item.toString(), Toast.LENGTH_SHORT).show();
-        } else {
-            String item = ((CustomAdapter) recyclerView.getAdapter()).getItem(recyclerView.getChildAdapterPosition(v));
+        } else if (adapter instanceof CustomAdapter) {
+            String item = ((CustomAdapter) adapter).getItem(recyclerView.getChildAdapterPosition(v));
             Toast.makeText(getApplicationContext(), item, Toast.LENGTH_SHORT).show();
+        } else {
+            MenuItem item = ((MenuRecyclerAdapter) adapter).getItem(recyclerView.getChildAdapterPosition(v));
+            Toast.makeText(getApplicationContext(), item.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
