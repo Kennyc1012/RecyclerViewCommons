@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DimenRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -219,6 +220,20 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     @ColorInt
     protected int getColor(@ColorRes int color) {
         return mResources.getColor(color);
+    }
+
+    /**
+     * Returns the dimension for the given dimension resource
+     *
+     * @param dimenRes
+     * @return
+     */
+    protected int getDimension(@DimenRes int dimenRes) {
+        return mResources.getDimensionPixelSize(dimenRes);
+    }
+
+    protected Resources getResources() {
+        return mResources;
     }
 
     /**
