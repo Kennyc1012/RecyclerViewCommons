@@ -43,6 +43,7 @@ public abstract class CursorRecyclerAdapter<VH extends RecyclerView.ViewHolder> 
         Cursor oldCursor = mCursor;
         mCursor = newCursor;
         if (oldCursor != null) oldCursor.close();
+        notifyDataSetChanged();
     }
 
     /**
