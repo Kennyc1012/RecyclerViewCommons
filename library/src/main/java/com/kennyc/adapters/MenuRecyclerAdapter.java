@@ -45,6 +45,11 @@ public class MenuRecyclerAdapter extends BaseRecyclerAdapter<MenuItem, MenuRecyc
         this.clickListener = clickListener;
     }
 
+    public MenuRecyclerAdapter(@NonNull Context context, @Nullable List<MenuItem> items, @Nullable View.OnClickListener clickListener) {
+        super(context, items);
+        this.clickListener = clickListener;
+    }
+
     @Override
     public MenuHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         MenuHolder holder = new MenuHolder(inflateView(R.layout.rv_menu_item, parent));
