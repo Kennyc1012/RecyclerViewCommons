@@ -267,7 +267,18 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
      */
     @CallSuper
     public void onDestroy() {
+        onDestroy(false);
+    }
+
+    /**
+     * Frees up any resources tied to the adapter. Should be called in an activities onDestroy lifecycle method if needed
+     *
+     * @param clearItems If the items in the adapter should be cleared
+     */
+    @CallSuper
+    public void onDestroy(boolean clearItems) {
         mResources = null;
         mInflater = null;
+        if (clearItems && mItems != null) mItems.clear();
     }
 }
