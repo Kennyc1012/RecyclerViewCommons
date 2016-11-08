@@ -2,6 +2,7 @@ package com.kennyc.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -92,5 +93,10 @@ public abstract class CursorRecyclerAdapter<VH extends RecyclerView.ViewHolder> 
     @Nullable
     protected Cursor getCursor() {
         return mCursor;
+    }
+
+    @CallSuper
+    public void onDestroy() {
+        mInflater = null;
     }
 }
