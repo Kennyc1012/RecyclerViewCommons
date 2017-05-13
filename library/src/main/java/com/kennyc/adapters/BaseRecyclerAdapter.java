@@ -8,6 +8,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.PluralsRes;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -229,22 +230,61 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
      * @param dimenRes
      * @return
      */
-    protected int getDimension(@DimenRes int dimenRes) {
+    protected int getDimensionPixelSize(@DimenRes int dimenRes) {
         return mResources.getDimensionPixelSize(dimenRes);
     }
 
+    /**
+     * Returns the {@link Resources} tied to the adapter
+     *
+     * @return
+     */
     protected Resources getResources() {
         return mResources;
     }
 
     /**
-     * Returns the string for the given string resource
+     * Returns the {@link String} for the given string resource
      *
-     * @param string String resource
+     * @param string {@link String} resource
      * @return
      */
     protected String getString(@StringRes int string) {
         return mResources.getString(string);
+    }
+
+    /**
+     * Returns the {@link String} for the given string resource
+     *
+     * @param string String resource
+     * @param args   Format arguments for the {@link String}
+     * @return
+     */
+    protected String getString(@StringRes int string, Object... args) {
+        return mResources.getString(string, args);
+    }
+
+    /**
+     * Returns a {@link String} for a given plural resource
+     *
+     * @param plural   Plural resource
+     * @param quantity Quantity for the plural
+     * @return
+     */
+    protected String getQuanityString(@PluralsRes int plural, int quantity) {
+        return mResources.getQuantityString(plural, quantity);
+    }
+
+    /**
+     * Returns a {@link String} for a given plural resource
+     *
+     * @param plural   Plural resource
+     * @param quantity Quantity for the plural
+     * @param args     Format arguments for the plural
+     * @return
+     */
+    protected String getQuanityString(@PluralsRes int plural, int quantity, Object... args) {
+        return mResources.getQuantityString(plural, quantity, args);
     }
 
     /**
