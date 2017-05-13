@@ -102,6 +102,7 @@ public class RVActivity extends AppCompatActivity implements View.OnClickListene
 
         @Override
         public void onDestroy() {
+            super.onDestroy();
             listener = null;
         }
 
