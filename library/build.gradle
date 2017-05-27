@@ -12,8 +12,6 @@ android {
         versionCode 1
     }
 
-    flavorDimensions 'language'
-
     productFlavors {
         java{
             versionName "$version_name-java"
