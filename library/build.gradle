@@ -1,13 +1,27 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
+    publishNonDefault true
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
+    }
+
+    flavorDimensions 'language'
+
+    productFlavors {
+        java{
+            versionName "$version_name-java"
+        }
+
+        kotlin{
+            versionName "$version_name-kotlin"
+        }
     }
 
     compileOptions {
