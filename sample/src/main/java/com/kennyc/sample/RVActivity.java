@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import com.kennyc.adapters.ArrayRecyclerAdapter;
 import com.kennyc.adapters.BaseRecyclerAdapter;
-import com.kennyc.adapters.MenuRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +42,7 @@ public class RVActivity extends AppCompatActivity implements View.OnClickListene
 
         switch (getIntent().getIntExtra("type", 0)) {
             case 0:
-                adapter = new ArrayRecyclerAdapter<>(this, android.R.layout.simple_list_item_1, data, this);
+                adapter = new ArrayRecyclerAdapter<>(this, android.R.layout.simple_list_item_1,android.R.id.text1, data, this);
                 break;
 
             case 1:
@@ -52,7 +50,7 @@ public class RVActivity extends AppCompatActivity implements View.OnClickListene
                 break;
 
             case 2:
-                adapter = new MenuRecyclerAdapter(this, R.menu.test_menu, this);
+                //   adapter = new MenuRecyclerAdapter(this, R.menu.test_menu, this);
                 break;
         }
 
@@ -70,8 +68,8 @@ public class RVActivity extends AppCompatActivity implements View.OnClickListene
             String item = ((CustomAdapter) adapter).getItem(recyclerView.getChildAdapterPosition(v));
             Toast.makeText(getApplicationContext(), item, Toast.LENGTH_SHORT).show();
         } else {
-            MenuItem item = ((MenuRecyclerAdapter) adapter).getItem(recyclerView.getChildAdapterPosition(v));
-            Toast.makeText(getApplicationContext(), item.toString(), Toast.LENGTH_SHORT).show();
+            //  MenuItem item = ((MenuRecyclerAdapter) adapter).getItem(recyclerView.getChildAdapterPosition(v));
+            //  Toast.makeText(getApplicationContext(), item.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 

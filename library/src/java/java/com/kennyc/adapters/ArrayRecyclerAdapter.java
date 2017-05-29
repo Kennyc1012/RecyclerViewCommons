@@ -22,7 +22,6 @@ import java.util.List;
  */
 public class ArrayRecyclerAdapter<T> extends RecyclerView.Adapter<ArrayRecyclerAdapter.SimpleTextViewHolder> {
     protected final String TAG = getClass().getSimpleName();
-
     private final List<T> mItems = new ArrayList<>();
 
     private LayoutInflater mInflater;
@@ -35,6 +34,7 @@ public class ArrayRecyclerAdapter<T> extends RecyclerView.Adapter<ArrayRecyclerA
 
     @Nullable
     private View.OnClickListener mClickListener = null;
+
 
     /**
      * Constructor for creating a {@link ArrayAdapter}
