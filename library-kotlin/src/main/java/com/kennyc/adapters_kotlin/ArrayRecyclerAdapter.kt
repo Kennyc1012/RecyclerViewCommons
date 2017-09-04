@@ -1,4 +1,4 @@
-package com.kennyc.adapters
+package com.kennyc.adapters_kotlin
 
 import android.content.Context
 import android.support.annotation.IdRes
@@ -52,13 +52,13 @@ class ArrayRecyclerAdapter<T>
         mClickListener = clickListener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArrayRecyclerAdapter.SimpleTextViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleTextViewHolder {
         val vh = SimpleTextViewHolder(mInflater.inflate(mLayoutResource, parent, false), mTextViewId)
         vh.itemView.setOnClickListener(mClickListener)
         return vh
     }
 
-    override fun onBindViewHolder(holder: ArrayRecyclerAdapter.SimpleTextViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SimpleTextViewHolder, position: Int) {
         val item = getItem(position)
 
         if (item is CharSequence) {
@@ -226,7 +226,7 @@ class ArrayRecyclerAdapter<T>
                     throw IllegalArgumentException("View is not a TextView")
                 }
             } else {
-                val viewById = view.findViewById(textViewId);
+                val viewById: View = view.findViewById(textViewId)
 
                 if (viewById is TextView) {
                     textView = viewById

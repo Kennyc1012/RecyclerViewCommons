@@ -1,4 +1,4 @@
-package com.kennyc.adapters;
+package com.kennyc.adapters_java;
 
 import android.content.ComponentName;
 import android.content.Context;

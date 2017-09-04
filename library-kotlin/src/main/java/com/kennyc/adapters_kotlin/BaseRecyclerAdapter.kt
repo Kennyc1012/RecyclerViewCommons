@@ -1,4 +1,4 @@
-package com.kennyc.adapters
+package com.kennyc.adapters_kotlin
 
 import android.content.Context
 import android.content.res.Resources

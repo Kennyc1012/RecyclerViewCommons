@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kennyc.adapters.ArrayRecyclerAdapter;
-import com.kennyc.adapters.BaseRecyclerAdapter;
+import com.kennyc.adapters_kotlin.ArrayRecyclerAdapter;
+import com.kennyc.adapters_kotlin.BaseRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
