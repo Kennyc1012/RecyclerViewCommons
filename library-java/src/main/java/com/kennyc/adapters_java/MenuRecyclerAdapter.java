@@ -78,8 +78,8 @@ public class MenuRecyclerAdapter extends BaseRecyclerAdapter<MenuItem, MenuRecyc
 
         public MenuHolder(@NonNull View view) {
             super(view);
-            icon = (ImageView) view.findViewById(android.R.id.icon);
-            title = (TextView) view.findViewById(android.R.id.title);
+            icon = view.findViewById(android.R.id.icon);
+            title = view.findViewById(android.R.id.title);
         }
     }
 

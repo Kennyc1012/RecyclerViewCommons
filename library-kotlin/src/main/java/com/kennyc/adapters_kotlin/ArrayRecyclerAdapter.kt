@@ -62,9 +62,9 @@ class ArrayRecyclerAdapter<T>
         val item = getItem(position)
 
         if (item is CharSequence) {
-            holder.textView!!.text = item
+            holder.textView.text = item
         } else {
-            holder.textView!!.text = item.toString()
+            holder.textView.text = item.toString()
         }
     }
 
